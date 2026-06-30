@@ -1,4 +1,12 @@
-module Main (main) where
+module Main where
+
+import Test.HUnit
+import Parse
+
+tests :: [Test]
+tests = parseTests
 
 main :: IO ()
-main = putStrLn "Test suite not yet implemented."
+main = do
+    _ <- runTestTT $ TestList tests
+    return ()

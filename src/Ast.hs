@@ -5,7 +5,7 @@ type Identity = String
 data Constant = CInt   Int
               | CFloat Float
               | CBool  Bool
-              deriving Show
+              deriving (Show, Eq)
 
 data Term = Var    Identity
           | Const  Constant
@@ -26,4 +26,4 @@ data Term = Var    Identity
           | Term :<= Term
           | Term :== Term
           | Term :!= Term
-          deriving Show
+          deriving (Show, Eq)
