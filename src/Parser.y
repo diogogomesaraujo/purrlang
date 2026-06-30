@@ -1,6 +1,7 @@
 {
 module Parser where
 import Ast
+import Lexer
 }
 
 %name parse
@@ -88,33 +89,4 @@ AtomicConstant : int   { CInt $1 }
 {
 parseError :: [Token] -> a
 parseError _ = error "Parse error"
-
-data Token = TokenFix
-           | TokenLet
-           | TokenIf
-           | TokenThen
-           | TokenElse
-           | TokenFn
-           | TokenIn
-           | TokenInt Int
-           | TokenFloat Float
-           | TokenVar String
-           | TokenTrue
-           | TokenFalse
-           | TokenAssign
-           | TokenArrow
-           | TokenPlus
-           | TokenMinus
-           | TokenTimes
-           | TokenDiv
-           | TokenLPar
-           | TokenRPar
-           | TokenMore
-           | TokenMoreEqual
-           | TokenLess
-           | TokenLessEqual
-           | TokenEquals
-           | TokenDifferent
-           | TokenAnd
-           | TokenOr
 }
