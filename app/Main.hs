@@ -5,5 +5,5 @@ import Lexer
 
 main :: IO ()
 main = do
-  parsed <- parse $ lexer "let x := 3 + 2 in x"
+  parsed <- return $ parse $ alexScanTokens "let x := 3 + 2 in x"
   putStr $ show parsed

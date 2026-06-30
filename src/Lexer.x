@@ -1,5 +1,7 @@
 {
 module Lexer where
+
+import Token
 }
 
 %wrapper "basic"
@@ -10,47 +12,38 @@ $large      = [A-Z]
 $small      = [a-z \_]
 $alpha      = [$small $large]
 
-@int   = -?$digit+
-@float = -?$digit+ "." $digit+
+@int   = "-"?$digit+
+@float = "-"?$digit+ "." $digit+
 
 tokens :-
     $white+                       ;
     "--".*                        ;
-    let                           { \s -> TokenLet }
-    in                            { \s -> TokenIn }
-    if                            { \s -> TokenIf }
+    fix                           { \_ -> TokenFix }
+    let                           { \_ -> TokenLet }
+    in                            { \_ -> TokenIn }
+    if                            { \_ -> TokenIf }
+    then                          { \_ -> TokenThen }
+    else                          { \_ -> TokenElse }
+    true                          { \_ -> TokenTrue }
+    false                         { \_ -> TokenFalse }
+    fn                            { \_ -> TokenFn }
+    "->"                          { \_ -> TokenArrow }
+    ":="                          { \_ -> TokenAssign }
+    "+"                           { \_ -> TokenPlus }
+    "-"                           { \_ -> TokenMinus }
+    "/"                           { \_ -> TokenDiv }
+    "*"                           { \_ -> TokenTimes }
+    "("                           { \_ -> TokenLPar }
+    ")"                           { \_ -> TokenRPar }
+    ">"                           { \_ -> TokenMore }
+    ">="                          { \_ -> TokenMoreEqual }
+    "<"                           { \_ -> TokenLess }
+    "<="                          { \_ -> TokenLessEqual }
+    "=="                          { \_ -> TokenEquals }
+    "!="                          { \_ -> TokenDifferent }
+    "&&"                          { \_ -> TokenAnd }
+    "||"                          { \_ -> TokenOr }
+    ">="                          { \_ -> TokenMoreEqual }
     @int                          { \s -> TokenInt (read s) }
     @float                        { \s -> TokenFloat (read s) }
     $alpha [$alpha $digit \_ \']* { \s -> TokenVar s }
-
-
-{
-data Token = TokenFix
-           | TokenLet
-           | TokenIf
-           | TokenThen
-           | TokenElse
-           | TokenFn
-           | TokenIn
-           | TokenInt Int
-           | TokenFloat Float
-           | TokenVar String
-           | TokenTrue
-           | TokenFalse
-           | TokenAssign
-           | TokenArrow
-           | TokenPlus
-           | TokenMinus
-           | TokenTimes
-           | TokenDiv
-           | TokenLPar
-           | TokenRPar
-           | TokenMore
-           | TokenMoreEqual
-           | TokenLess
-           | TokenLessEqual
-           | TokenEquals
-           | TokenDifferent
-           | TokenAnd
-           | TokenOr
-}

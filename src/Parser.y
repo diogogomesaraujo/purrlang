@@ -1,7 +1,7 @@
 {
 module Parser where
 import Ast
-import Lexer
+import Token
 }
 
 %name parse
@@ -33,7 +33,7 @@ import Lexer
     '>='  { TokenMoreEqual }
     '<'   { TokenLess }
     '<='  { TokenLessEqual }
-    '=='   { TokenEquals }
+    '=='  { TokenEquals }
     '!='  { TokenDifferent }
     '&&'  { TokenAnd }
     '||'  { TokenOr }
